@@ -1,0 +1,193 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-image: url("images/milk.jpg");
+  background-size: cover;
+  margin: 0;
+}
+
+.backdrop {
+  position: fixed;
+  display: none;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.main-header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #1560BD;
+  padding: 8px 16px;
+  z-index: 1;
+}
+
+.main-header>div {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.main-header__brand {
+  color: #ffff;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 20px;
+  height: 18px;
+  /* width: 20px; */
+  display: inline-block;
+}
+
+.main-nav {
+  display: inline-block;
+  text-align: right;
+  width: calc(100% - 190px);
+  vertical-align: middle;
+}
+
+.main-nav__items {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.main-nav__item {
+  display: inline-block;
+  margin: 0 16px;
+}
+
+.main-nav__item a {
+  text-decoration: none;
+  color: #ffff;
+  font-weight: bold;
+  padding: 3px 0;
+}
+
+.main-nav__item a:hover, .main-nav__item a:active {
+  color: white;
+  border-bottom: 5px solid white;
+}
+
+#loginsection {
+  position: absolute;
+  width: 80%;
+  max-width: 500px;
+  top: 30%;
+  left: 10%;
+  height: 300px;
+  text-align: center;
+  border: 1px solid whitesmoke;
+  box-shadow: 10px 10px 8px #888888;
+  z-index: 10;
+}
+
+#loginsection span {
+  font-weight: bold;
+}
+
+#product-overview h1 {
+  color: #1560BD;
+}
+
+input {
+  margin: 10px 10px;
+  padding: 5px 5px;
+  width: 80%;
+  border: 2px solid black;
+}
+
+input:focus {
+  border: 2px solid #1560BD;
+}
+
+.login_button {
+  font-weight: bold;
+  color: white;
+  width: 100px;
+  height: 40px;
+  background-color: #1560BD;
+  border-radius: 5px 5px 5px 5px;
+}
+
+.toggle-button {
+  width: 3rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding-top: 0;
+  padding-bottom: 0;
+  vertical-align: middle;
+}
+
+.toggle-button:focus {
+  outline: none;
+}
+
+.toggle-button__bar {
+  width: 100%;
+  height: 0.2rem;
+  background: #ffff;
+  display: block;
+  margin: 0.6rem 0;
+}
+
+.main-nav {
+  display: none;
+}
+
+@media (min-width: 40rem) {
+  .toggle-button {
+    display: none;
+  }
+
+  .main-nav {
+    display: inline-block;
+    text-align: right;
+    width: calc(100% - 177px);
+    vertical-align: middle;
+  }
+
+  #loginsection{
+    width: 80%;
+  }
+}
+
+.mobile-nav {
+  display: none;
+  position: fixed;
+  z-index: 101;
+  top: 0;
+  left: 0;
+  background: white;
+  width: 80%;
+  height: 100vh;
+}
+
+.mobile-nav__items {
+  width: 90%;
+  height: 100%;
+  list-style: none;
+  margin: 10% auto;
+  padding: 0;
+  text-align: center;
+}
+
+.mobile-nav__item {
+  margin: 1rem 0;
+  color: #1560BD;
+}
+
+.mobile-nav__item a {
+  font-size: 1.5rem;
+}
+
+.open {
+  display: block !important;
+}

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/style.css">
+  <script defer src="/static/login.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <title>Overall Analysis</title>
+</head>
+
+<body>
+  <div class="backdrop"></div>
+  <header class="main-header">
+    <div>
+      <button class="toggle-button">
+        <span class="toggle-button__bar"></span>
+        <span class="toggle-button__bar"></span>
+        <span class="toggle-button__bar"></span>
+      </button>
+      <a href="#" class="main-header__brand">
+        Arish Milk Shop
+      </a>
+    </div>
+    <nav class="main-nav">
+      <ul class="main-nav__items">
+        <li class="main-nav__item">
+          <a href="page3.html">Customer Analysis</a>
+        </li>
+        <li class="main-nav__item">
+          <a href="page4.html">Customer Calculator</a>
+        </li>
+        <li class="main-nav__item">
+          <a href="page1.html">Data Entry</a>
+        </li>
+        <li class="main-nav__item">
+          <a href="login.html">Logout</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <nav class="mobile-nav">
+    <ul class="mobile-nav__items">
+      <li class="mobile-nav__item">
+        <a href="page4.html">Customer Calculator</a>
+      </li>
+      <li class="mobile-nav__item">
+        <a href="page3.html">Customer Analysis</a>
+      </li>
+      <li class="mobile-nav__item">
+        <a href="page1.html">Data Entry</a>
+      </li>
+      <li class="mobile-nav__item ">
+        <a href="login.html">Logout</a>
+      </li>
+    </ul>
+  </nav>
+  <br><br><br><br>
+  <main>
+    <div class="bodyContainer">
+      <h3>COW MILK</h3>
+      <div class="displayBox">
+        <div class="graphDisplay">
+          <canvas id="cowmilkchart"></canvas>
+        </div>
+      </div>
+      <h3>BUFFALO MILK</h3>
+      <div class="displayBox">
+        <div class="graphDisplay">
+          <canvas id="buffalomilkchart"></canvas>
+        </div>
+      </div>
+      <h3>Top People</h3>
+      <div class="displayBox">
+        <div class="valueDisplay">
+          <h3>Cow Milk</h3>
+          <!-- content to be displayed by javascript -->
+          <div class="names">
+            <ol id="topCowMilk"></ol>
+          </div>
+        </div>
+        <div class="valueDisplay">
+          <h3>Buffalo Milk</h3>
+          <!-- content to be displayed by javascript -->
+          <ol id="topBuffaloMilk"></ol>
+        </div>
+      </div>
+    </div>
+  </main>
+  <script>
+    var top10buff=JSON.parse({{ top10buff | tojson | safe }});
+    var top10cow=JSON.parse({{ top10cow | tojson | safe }});
+    var buffaloList=document.getElementById("topBuffaloMilk")
+    var cowList=document.getElementById("topCowMilk")
+    // Create items array
+    var items = Object.keys(top10buff).map(function(key) {
+    return [key, top10buff[key]];
+    });
+    // Sort the array based on the second element
+    items.sort(function(first, second) {
+      return second[1] - first[1];
+    });
+    // Create a new array with ordered items for buffalomilk
+    for(i in items){
+      let line=document.createElement('li')
+      line.innerHTML=items[i][0]
+      buffaloList.appendChild(line)
+    }
+
+    var items = Object.keys(top10cow).map(function(key) {
+      return [key, top10cow[key]];
+      });
+      // Sort the array based on the second element
+      items.sort(function(first, second) {
+        return second[1] - first[1];
+      });
+      // Create a new array with ordered items for buffalomilk
+      for(i in items){
+        let line=document.createElement('li');
+        line.innerHTML=items[i][0];
+        cowList.appendChild(line);
+      }
+
+
+    var overallfinl=JSON.parse({{ overallfinl | tojson | safe }});
+    var cowmilk_dates,buffalomilk_dates,cowmilk_values,buffalomilk_values,cowMilkForecasted,buffaloMilkForecasted;
+    cowMilkForecasted=overallfinl[0][1]
+    buffaloMilkForecasted=overallfinl[0][0]
+    buffalomilk_dates=overallfinl[1].date
+    buffalomilk_values=overallfinl[1].buffalomilk
+    cowmilk_dates=overallfinl[2].date
+    cowmilk_values=overallfinl[2].cowmilk
+      var predicteddates=[]
+      for(i in cowMilkForecasted){
+        predicteddates.push("predicted upcoming values")
+      }
+    buffalomilk_values=buffalomilk_values.concat(buffaloMilkForecasted)
+    cowmilk_values=cowmilk_values.concat(cowMilkForecasted)
+    buffalomilk_dates=buffalomilk_dates.concat(predicteddates)
+    cowmilk_dates=cowmilk_dates.concat(predicteddates)
+
+
+    var cowmilkchart = document.getElementById('cowmilkchart').getContext('2d');
+    var buffalomilkchart = document.getElementById('buffalomilkchart').getContext('2d');
+
+    var myChart1 = new Chart(cowmilkchart, {
+      type: 'line',
+      data: {
+        labels: cowmilk_dates,
+        datasets: [{
+          label: "Cow Milk(Litres)",
+          data: cowmilk_values,
+          backgroundColor: [
+            'rgba(255, 255, 255, .5)',
+          //  'rgba(49, 240, 53, .5)',
+          //  'rgba(243, 57, 79, .5)',
+          //  'rgba(70, 51, 244, .5)',
+          //  'rgba(244, 51, 212, .5)',
+          //  'rgba(235, 245, 34, .5)'
+          ],
+          borderColor: '#000',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: false
+            }
+          }]
+        }
+      }
+    });
+
+    var myChart2 = new Chart(buffalomilkchart, {
+      type: 'line',
+      data: {
+        labels: buffalomilk_dates,
+        datasets: [{
+          label: "Buffalo Milk(Litres)",
+          data: buffalomilk_values,
+          backgroundColor: [
+            'rgba(0, 0, 0, .5)',
+          //  'rgba(49, 240, 53, .5)',
+          //  'rgba(243, 57, 79, .5)',
+          //  'rgba(70, 51, 244, .5)',
+          //  'rgba(244, 51, 212, .5)',
+          //  'rgba(235, 245, 34, .5)'
+          ],
+          borderColor: '#000',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: false,
+              fontSize: 12
+            }
+          }],
+          xAxes:[{
+            ticks:{
+              fontSize:9
+            }
+          }]
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>

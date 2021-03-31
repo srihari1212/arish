@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Login</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="/static/login.css">
+</head>
+
+<body>
+
+    <div class="backdrop"></div>
+    <header class="main-header">
+        <div>
+            <!-- <button class="toggle-button">
+                <span class="toggle-button__bar"></span>
+                <span class="toggle-button__bar"></span>
+                <span class="toggle-button__bar"></span>
+            </button> -->
+            <a href="#" class="main-header__brand">
+                Arish Milk Shop
+            </a>
+        </div>
+    </header>
+    <main>
+        <div class="login-container">
+            <div id="loginsection">
+                <section id="product-overview">
+                    <h1>Login</h1>
+                </section>
+                <form action="page1" method="POST" class="login_form">
+                    <div class="username__input">
+                        <span class="username_heading">UserName:</span><input type="text" name="u_name" value=""
+                            placeholder="Enter the username.." required />
+                    </div>
+                    <br />
+                    <div class="password__input">
+                        <span class="password_heading">Password:</span><input type="password" name="u_password" value=""
+                            placeholder="Enter the password.." required />
+                    </div>
+                    <br />
+                    <button class="login_button" id="login_button" type="submit">Login</button>
+                </form>
+            </div>
+        </div>
+    </main>
+    <br />
+    <br />
+    <br />
+    <br />
+    <!-- <form action="" method="POST" class="login_form">
+        <label for="username">UserName<input type="text" id="u_name" value="" placeholder="Enter the username.."
+                required />
+        </label>
+        <lable for="password">Password:<input type="password" id="u_password" value=""
+                placeholder="Enter the password.." required />
+        </lable>
+        <button class="login_button" id="login_button" type="submit">Login</button>
+    </form> -->
+</body>
+
+</html>
